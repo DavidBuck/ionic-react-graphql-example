@@ -7,7 +7,7 @@ import {
   IonContent,
   IonGrid,
   IonRow,
-  IonText,
+  IonText
 } from "@ionic/react"
 import { gql } from "apollo-boost"
 import React from "react"
@@ -18,21 +18,21 @@ const NEW_VARIABLES = {
     author: "New",
     id: 4,
     postid: 4,
-    title: "New Post",
-  },
+    title: "New Post"
+  }
 }
 
 const UPDATE_VARIABLES = {
   variables: {
     id: 4,
-    title: "Updated Post",
-  },
+    title: "Updated Post"
+  }
 }
 
 const DELETE_VARIABLES = {
   variables: {
-    id: 1,
-  },
+    id: 1
+  }
 }
 
 const ALL_POSTS = gql`
@@ -94,9 +94,9 @@ function Home() {
       const allPosts = queryResult?.allPosts
       cache.writeQuery({
         data: { allPosts: allPosts?.concat([createPost]) },
-        query: ALL_POSTS,
+        query: ALL_POSTS
       })
-    },
+    }
   })
 
   const [updatePost] = useMutation(UPDATE_POST)
@@ -106,14 +106,14 @@ function Home() {
       const queryResult = cache.readQuery<Data>({ query: ALL_POSTS })
       const allPosts = queryResult?.allPosts
       const {
-        variables: { id },
+        variables: { id }
       } = DELETE_VARIABLES
       allPosts?.splice(id - 1, 1)
       cache.writeQuery({
         data: { allPosts },
-        query: ALL_POSTS,
+        query: ALL_POSTS
       })
-    },
+    }
   })
 
   if (loading) {
